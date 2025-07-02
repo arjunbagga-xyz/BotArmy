@@ -24,8 +24,3 @@ A single aggressive bot that trades across a wide range of securities, seeking o
 
 
 ---
-
-## Contact
-Interested in these systems or want to learn more?
-
-**[Contact Me](mailto:abagga161@live.com)**
