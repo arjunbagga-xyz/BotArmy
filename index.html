@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BotArmy: Trading Bot Offerings</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Rajdhani', 'Share Tech Mono', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            color: #e2e2e2;
+            background: #1a2327;
+            /* Army camo + stock chart overlay */
+            background-image:
+                url('assets/rambo.jpg'), /* fallback if no camo */
+                linear-gradient(120deg, rgba(34,139,34,0.12) 0%, rgba(0,0,0,0.7) 100%),
+                url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80');
+            background-size: cover, cover, cover;
+            background-blend-mode: overlay, multiply, normal;
+        }
+        .main-glass {
+            max-width: 1100px;
+            margin: 48px auto 40px auto;
+            border-radius: 24px;
+            background: rgba(30, 40, 30, 0.45);
+            box-shadow: 0 8px 40px #000b, 0 1.5px 16px #2e4d2d44;
+            border: 2.5px solid rgba(180, 230, 29, 0.18);
+            backdrop-filter: blur(12px) saturate(1.2);
+            -webkit-backdrop-filter: blur(12px) saturate(1.2);
+            padding: 32px 32px 24px 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+        }
+        .intro {
+            background: none;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            margin: 0 0 12px 0;
+            text-align: center;
+        }
+        .intro h1 {
+            font-size: 2.2em;
+            color: #b4e61d;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+            font-family: 'Rajdhani', Arial, sans-serif;
+            text-shadow: 0 2px 8px #000a;
+        }
+        .intro p {
+            font-size: 1.18em;
+            color: #e2e2e2;
+            margin: 0 auto 0 auto;
+            max-width: 600px;
+            font-family: 'Share Tech Mono', Arial, monospace;
+        }
+        .bots-glass {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 36px;
+        }
+        .bot-card {
+            background: rgba(34, 49, 34, 0.55);
+            border-radius: 18px;
+            box-shadow: 0 4px 24px #0007, 0 1.5px 8px #b4e61d33;
+            border: 2px solid #b4e61d77;
+            min-width: 320px;
+            max-width: 340px;
+            flex: 1 1 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+            transition: box-shadow 0.2s, border 0.2s, transform 0.2s, background 0.2s;
+            backdrop-filter: blur(6px) saturate(1.1);
+            -webkit-backdrop-filter: blur(6px) saturate(1.1);
+            overflow: hidden;
+        }
+        .bot-card:hover {
+            box-shadow: 0 12px 40px #b4e61d99, 0 2px 16px #000a;
+            border: 2px solid #fff;
+            background: rgba(180, 230, 29, 0.10);
+            transform: scale(1.03);
+        }
+        .bot-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 16px 16px 0 0;
+            border-bottom: none;
+            background: #222;
+            position: relative;
+            display: block;
+            /* Fix for border radius overflow */
+            box-shadow: 0 2px 0 0 #b4e61d;
+            z-index: 1;
+        }
+        .bot-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            background: linear-gradient(0deg, rgba(30,40,30,0.82) 60%, rgba(30,40,30,0.12) 100%);
+            border-radius: 16px 16px 0 0;
+            color: #fff;
+            padding: 0 12px 18px 12px;
+            pointer-events: none;
+        }
+        .bot-title {
+            font-size: 1.25em;
+            color: #b4e61d;
+            margin: 0 0 4px 0;
+            font-family: 'Rajdhani', Arial, sans-serif;
+            letter-spacing: 1.5px;
+            text-align: center;
+            text-shadow: 0 2px 8px #000a;
+            z-index: 2;
+        }
+        .bot-short-desc {
+            font-size: 1em;
+            color: #e2e2e2;
+            text-align: center;
+            text-shadow: 0 1px 4px #000a;
+            z-index: 2;
+        }
+        /* Dialog styles */
+        .bot-dialog-bg {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(20,30,20,0.85);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .bot-dialog-bg.active {
+            display: flex;
+        }
+        .bot-dialog {
+            background: rgba(34,49,34,0.95);
+            border-radius: 18px;
+            box-shadow: 0 8px 40px #000b, 0 1.5px 16px #b4e61d44;
+            border: 2.5px solid #b4e61d;
+            max-width: 420px;
+            width: 95vw;
+            padding: 32px 28px 24px 28px;
+            position: relative;
+            color: #e2e2e2;
+            animation: chartPop 0.5s;
+        }
+        .bot-dialog .bot-title {
+            font-size: 1.4em;
+            margin-bottom: 8px;
+        }
+        .bot-dialog-close {
+            position: absolute;
+            top: 12px; right: 18px;
+            font-size: 1.7em;
+            color: #b4e61d;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 2;
+            transition: color 0.2s;
+        }
+        .bot-dialog-close:hover {
+            color: #fff;
+        }
+        .bot-dialog .backtest-chart {
+            margin: 18px auto 0 auto;
+        }
+        .bot-dialog ul {
+            margin: 8px 0 0 18px;
+        }
+        .bot-dialog li {
+            color: #b4e61d;
+        }
+        @keyframes chartPop {
+            0% { transform: scale(0.7); opacity: 0; }
+            80% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+        @media (max-width: 900px) {
+            .main-glass { padding: 18px 4vw; }
+            .bots-glass {
+                flex-direction: column;
+                gap: 24px;
+                align-items: center;
+            }
+        }
+        @media (max-width: 600px), (orientation: portrait) {
+            .bots-glass {
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 18px;
+            }
+            .bot-card {
+                min-width: 90vw;
+                max-width: 98vw;
+            }
+            .bot-img {
+                height: 180px;
+            }
+            .bot-overlay {
+                position: absolute;
+                top: 0; left: 0; right: 0; bottom: 0;
+                border-radius: 16px 16px 0 0;
+                background: linear-gradient(0deg, rgba(30,40,30,0.82) 60%, rgba(30,40,30,0.12) 100%);
+                color: #fff;
+                padding: 0 12px 18px 12px;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                align-items: center;
+                pointer-events: none;
+            }
+        }
+        /* Top bar ticker */
+        .top-ticker {
+            width: 100vw;
+            background: rgba(20,30,20,0.92);
+            border-bottom: 2px solid #b4e61d;
+            color: #b4e61d;
+            font-family: 'Share Tech Mono', Arial, monospace;
+            font-size: 1.08em;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 2000;
+            height: 38px;
+        }
+        .ticker-content {
+            display: flex;
+            align-items: center;
+            animation: ticker-scroll 30s linear infinite;
+            white-space: nowrap;
+        }
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            margin-right: 48px;
+            gap: 8px;
+        }
+        .ticker-icon {
+            width: 22px; height: 22px;
+            vertical-align: middle;
+        }
+        @keyframes ticker-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .main-glass { margin-top: 100px; }
+        /* Candlestick chart background */
+        .candlestick-bg {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.58;
+        }
+        /* Crypto/stock icons floating */
+        .floating-icons {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .floating-icon {
+            position: absolute;
+            opacity: 0.62;
+            width: 48px; height: 48px;
+            animation: floatIcon 18s linear infinite;
+        }
+        .floating-icon.btc { right: 8%; top: 28%; animation-delay: 0s; }
+        .floating-icon.eth { right: 12%; bottom: 22%; animation-delay: 4s; }
+        .floating-icon.sol {
+            left: 22%; bottom: 18%; animation-delay: 8s;
+            content: url('https://cdn.jsdelivr.net/npm/cryptocurrency-icons/svg/color/sol.svg');
+        }
+        .floating-icon.spx {
+            left: 10%; top: 12%; animation-delay: 12s;
+            content: url('assets/SPGI_BIG.svg');
+        }
+        @keyframes floatIcon {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-24px) scale(1.08); }
+            100% { transform: translateY(0) scale(1); }
+        }
+        /* News headline bar */
+        .news-bar {
+            width: 100vw;
+            background: rgba(34,49,34,0.92);
+            color: #fff;
+            font-family: 'Share Tech Mono', Arial, monospace;
+            font-size: 1em;
+            letter-spacing: 1px;
+            overflow: hidden;
+            position: fixed;
+            top: 38px; left: 0; right: 0;
+            z-index: 1999;
+            height: 28px;
+            display: flex;
+            align-items: center;
+        }
+        .news-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: news-scroll 40s linear infinite;
+        }
+        @keyframes news-scroll {
+            0% { transform: translateX(100vw); }
+            100% { transform: translateX(-100vw); }
+        }
+        .news-icon {
+            width: 18px; height: 18px; margin-right: 8px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-ticker">
+        <div class="ticker-content" id="ticker-content">
+            <!-- Populated by JS -->
+        </div>
+    </div>
+    <div class="news-bar">
+        <span class="news-content" id="news-content">
+            <span id="news-headlines">Loading news...</span>
+        </span>
+    </div>
+    <div class="floating-icons">
+        <img class="floating-icon btc" src="https://cdn.jsdelivr.net/npm/cryptocurrency-icons/svg/color/btc.svg" alt="BTC">
+        <img class="floating-icon eth" src="https://cdn.jsdelivr.net/npm/cryptocurrency-icons/svg/color/eth.svg" alt="ETH">
+        <img class="floating-icon sol" src="https://cdn.jsdelivr.net/npm/cryptocurrency-icons/svg/color/sol.svg" alt="SOL">
+        <img class="floating-icon spx" src="assets/SPGI_BIG.svg" alt="S&P 500">
+    </div>
+    <div class="candlestick-bg">
+        <svg width="100%" height="100%" viewBox="0 0 1200 400" preserveAspectRatio="none">
+            <g stroke="#b4e61d" stroke-width="2">
+                <rect x="30" y="120" width="8" height="60" fill="#b4e61d"/>
+                <rect x="60" y="100" width="8" height="90" fill="#e74c3c"/>
+                <rect x="90" y="140" width="8" height="40" fill="#b4e61d"/>
+                <rect x="120" y="110" width="8" height="80" fill="#e74c3c"/>
+                <rect x="150" y="130" width="8" height="60" fill="#b4e61d"/>
+                <rect x="180" y="90" width="8" height="100" fill="#e74c3c"/>
+                <rect x="210" y="150" width="8" height="30" fill="#b4e61d"/>
+                <rect x="240" y="120" width="8" height="60" fill="#b4e61d"/>
+                <!-- ...more for effect... -->
+            </g>
+        </svg>
+    </div>
+    <div class="main-glass">
+        <div class="intro">
+            <h1>Welcome to BotArmy</h1>
+            <p>Elite algorithmic trading bots, inspired by military precision and powered by advanced finance technology. Explore our unique systems below and see how each bot can help you conquer the markets.</p>
+        </div>
+        <div class="bots-glass">
+            <div class="bot-card" data-bot="surgical-strike">
+                <img class="bot-img" src="assets/surgical.png" alt="Surgical Strike Bot" onerror="this.src='assets/rambo.jpg'">
+                <div class="bot-overlay">
+                    <div class="bot-title">Surgical Strike</div>
+                    <div class="bot-short-desc">5-bot precision team on one security</div>
+                </div>
+            </div>
+            <div class="bot-card" data-bot="sniper">
+                <img class="bot-img" src="assets/sniper.jpg" alt="Sniper Bot" onerror="this.src='assets/rambo.jpg'">
+                <div class="bot-overlay">
+                    <div class="bot-title">Pump n Dump Sniper</div>
+                    <div class="bot-short-desc">Snipes the momentum of scams</div>
+                </div>
+            </div>
+            <div class="bot-card" data-bot="rambo">
+                <img class="bot-img" src="assets/rambo.jpg" alt="Rambo Bot">
+                <div class="bot-overlay">
+                    <div class="bot-title">Rambo</div>
+                    <div class="bot-short-desc">Rampages across many securities</div>
+                </div>
+            </div>
+        </div>
+        <div class="contact">
+            <p>Our Process:</p>
+            <ol>
+                <li>We assess your portfolio size, risk profile, timeframe and expectations</li>
+                <li>A prcise combination of trading system as per your needs will be created</li>
+                <li>You can either:<ul>Host/Run bots yourself. One time Payment. No access to the Rambo.</ul><ul>We link your account to our servers and charge 20% of the profits.</ul></ul>
+                <li>Have Fun! Cheers!</li>
+            </ol>
+            <br>
+            <div style="display: flex; justify-content: center; width: 100%;">
+                <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: center;">
+                    <a href="https://wa.me/message/KFJISKTA3QKVF1" target="_blank" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+                        <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" alt="WhatsApp" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 10px;">WhatsApp
+                    </a>                    
+                    <a href="mailto:abagga161@live.com" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+                        <img src="https://img.icons8.com/fluency/48/000000/mail.png" alt="Email" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 10px;">Email
+                    </a>
+                    <a href="https://www.linkedin.com/in/arjun-bagga-3813b2184/" target="_blank" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+                        <img src="https://img.icons8.com/color/48/000000/linkedin.png" alt="LinkedIn" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 10px;">LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Dialogs for bots -->
+    <div class="bot-dialog-bg" id="dialog-surgical-strike">
+        <div class="bot-dialog">
+            <button class="bot-dialog-close" onclick="closeDialog()">&times;</button>
+            <div class="bot-title">Surgical Strike</div>
+            <div><strong>Description:</strong> Using Markov Chain to monitar and coordinate a 5-bot system operating on a single security. Each bot specializes in a specific market condition or time frame, working together for precision entries and exits.</div>
+            <div class="backtest-chart">[Surgical Strike Backtest Chart Placeholder]</div>
+            <div style="margin-top:10px;"><strong>Backtest Result:</strong> Synergistic performance for maximum precision and risk control. Self correcting everytime the market changes.</div>
+        </div>
+    </div>
+    <div class="bot-dialog-bg" id="dialog-sniper">
+        <div class="bot-dialog">
+            <button class="bot-dialog-close" onclick="closeDialog()">&times;</button>
+            <div class="bot-title">Sniper</div>
+            <div><strong>Description:</strong> A momentum-detection bot that identifies Pump n Dump cycles happening on chain in real time. Rides the wave and exit before everything collapses</div>
+            <div class="backtest-chart">[Sniper Backtest Chart Placeholder]</div>
+            <div style="margin-top:10px;">Backtest Results: Quite accurate but medium risk management. High Reward.</div>
+        </div>
+    </div>
+    <div class="bot-dialog-bg" id="dialog-rambo">
+        <div class="bot-dialog">
+            <button class="bot-dialog-close" onclick="closeDialog()">&times;</button>
+            <div class="bot-title">Rambo</div>
+            <div><strong>Description:</strong> A single aggressive HFT bot that trades across a wide range of securities, seeking opportunities like Rambo rampaging through an army. Focuses on high activity and broad market coverage.</div>
+            <div class="backtest-chart">[Rambo Backtest Chart Placeholder]</div>
+            <div style="margin-top:10px;">Backtest Results: High trade volume, broad market coverage, feeds on volatility, market condition independant.</div>
+        </div>
+    </div>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Open dialog on bot card/image click
+        document.querySelectorAll('.bot-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const bot = this.getAttribute('data-bot');
+                document.querySelectorAll('.bot-dialog-bg').forEach(d => d.classList.remove('active'));
+                document.getElementById('dialog-' + bot).classList.add('active');
+                // If Rambo, load chart
+                if (bot === 'rambo') loadRamboBacktestPlotly();
+            });
+        });
+        // Close dialog
+        function closeDialog() {
+            document.querySelectorAll('.bot-dialog-bg').forEach(d => d.classList.remove('active'));
+        }
+        window.closeDialog = closeDialog;
+        // Close dialog on background click
+        document.querySelectorAll('.bot-dialog-bg').forEach(bg => {
+            bg.addEventListener('click', function(e) {
+                if (e.target === this) closeDialog();
+            });
+        });
+        // Live ticker data (now fetched from APIs)
+        const tickerData = [
+            { icon: 'https://cdn.jsdelivr.net/npm/cryptocurrency-icons/svg/color/btc.svg', label: 'BTC/USD', symbol: 'bitcoin', price: 0, change: '' },
+            { icon: 'https://cdn.jsdelivr.net/npm/cryptocurrency-icons/svg/color/eth.svg', label: 'ETH/USD', symbol: 'ethereum', price: 0, change: '' },
+            { icon: 'https://cdn.jsdelivr.net/npm/cryptocurrency-icons/svg/color/sol.svg', label: 'SOL/USD', symbol: 'solana', price: 0, change: '' },
+            { icon: 'assets/SPGI_BIG.svg', label: 'S&P 500', symbol: '^GSPC', price: 0, change: '' },
+        ];
+        async function fetchCryptoPrices() {
+            try {
+                const resp = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_change=true');
+                const data = await resp.json();
+                tickerData[0].price = data.bitcoin.usd;
+                tickerData[0].change = (data.bitcoin.usd_24h_change > 0 ? '+' : '') + data.bitcoin.usd_24h_change.toFixed(2) + '%';
+                tickerData[1].price = data.ethereum.usd;
+                tickerData[1].change = (data.ethereum.usd_24h_change > 0 ? '+' : '') + data.ethereum.usd_24h_change.toFixed(2) + '%';
+                tickerData[2].price = data.solana.usd;
+                tickerData[2].change = (data.solana.usd_24h_change > 0 ? '+' : '') + data.solana.usd_24h_change.toFixed(2) + '%';
+            } catch (e) {
+                // fallback: keep previous or show error
+            }
+        }
+        // Alpha Vantage API key (demo for public, replace with your own for production)
+        const ALPHA_VANTAGE_KEY = 'KZCM2U8RURIMDH55';
+        // List of tickers to fetch (S&P 500, Apple, Microsoft, Palantir, Anduril, Meta, X, Tesla, SpaceX, Neuralink, Dubai, China, India defense)
+        const STOCK_TICKERS = [
+            'SPY', // S&P 500 ETF (Alpha Vantage does not support ^GSPC directly)
+            'AAPL', 'MSFT', 'PLTR', 'META', 'TSLA',
+            // Elon companies (public only): TSLA, Twitter (X: no ticker), SpaceX/Neuralink/Boring (not public, skip)
+            // Dubai: EMIRATESNBD.DU, DPW.DU, EMAARPROPERTIES.DU (Alpha Vantage uses .DU for Dubai)
+            'EMIRATESNBD.DU', 'DPW.DU', 'EMAARPROPERTIES.DU',
+            // China: BABA, TCEHY, BIDU, JD, PDD
+            'BABA', 'TCEHY', 'BIDU', 'JD', 'PDD',
+            // India defense: HAL.NSE, BDL.NSE, BEL.NSE, BEML.NSE
+            'HAL.NSE', 'BDL.NSE', 'BEL.NSE', 'BEML.NSE'
+        ];
+
+        // Fetch S&P 500 (SPY ETF) price from Alpha Vantage
+        async function fetchSP500() {
+            try {
+                const resp = await fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=SPY&apikey=${ALPHA_VANTAGE_KEY}`);
+                const data = await resp.json();
+                const quote = data['Global Quote'];
+                if (quote && quote['05. price'] && quote['08. previous close']) {
+                    const last = parseFloat(quote['05. price']);
+                    const prev = parseFloat(quote['08. previous close']);
+                    tickerData[3].price = last;
+                    const diff = last - prev;
+                    const pct = (diff / prev * 100).toFixed(2);
+                    tickerData[3].change = (diff >= 0 ? '+' : '') + pct + '%';
+                } else {
+                    tickerData[3].price = '-';
+                    tickerData[3].change = '';
+                }
+            } catch (e) {
+                tickerData[3].price = '-';
+                tickerData[3].change = '';
+            }
+        }
+
+        // Fetch news from Alpha Vantage (and fallback to CryptoCompare for crypto)
+        async function fetchNews() {
+            let news = [];
+            try {
+                // Alpha Vantage news for all tickers (first 20 headlines)
+                for (let i = 0; i < STOCK_TICKERS.length; i++) {
+                    const symbol = STOCK_TICKERS[i];
+                    const resp = await fetch(`https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=${symbol}&apikey=${ALPHA_VANTAGE_KEY}`);
+                    const data = await resp.json();
+                    if (data.feed && Array.isArray(data.feed)) {
+                        news = news.concat(data.feed.slice(0, 2).map(n => n.title));
+                    }
+                    if (news.length > 20) break;
+                }
+            } catch (e) {}
+            try {
+                // CryptoCompare News API (crypto news, fallback)
+                const respCrypto = await fetch('https://min-api.cryptocompare.com/data/v2/news/?lang=EN');
+                const dataCrypto = await respCrypto.json();
+                if (dataCrypto && dataCrypto.Data && dataCrypto.Data.length > 0) {
+                    news = news.concat(dataCrypto.Data.slice(0, 6).map(n => n.title));
+                }
+            } catch (e) {}
+            if (news.length > 0) {
+                document.getElementById('news-headlines').innerHTML = news.slice(0, 20).join(' | ');
+            } else {
+                document.getElementById('news-headlines').innerHTML = 'Unable to load news.';
+            }
+        }
+        fetchNews();
+        setInterval(fetchNews, 60000);
+
+        function updateTicker() {
+            const el = document.getElementById('ticker-content');
+            el.innerHTML = '';
+            for (let i = 0; i < 2; i++) { // repeat for smooth scroll
+                tickerData.forEach(t => {
+                    el.innerHTML += `<span class="ticker-item"><img class="ticker-icon" src="${t.icon}" alt="icon">${t.label}: <span style='color:${t.change.startsWith('+') ? '#1de9b6' : '#e74c3c'}'>${t.price} ${t.change}</span></span>`;
+                });
+                // Add top gainers/losers to the tape
+                if (window.gainersLosersHTML) {
+                    el.innerHTML += `<span class="ticker-item" style="margin-left:32px;">${window.gainersLosersHTML}</span>`;
+                }
+            }
+        }
+
+        async function updateGainersLosers() {
+            try {
+                const resp = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h');
+                const data = await resp.json();
+                const sorted = data.filter(c => c.price_change_percentage_24h !== null);
+                sorted.sort((a, b) => b.price_change_percentage_24h - a.price_change_percentage_24h);
+                const gainers = sorted.slice(0, 3);
+                const losers = sorted.slice(-3).reverse();
+                let html = '<span style="color:#1de9b6;font-weight:bold;">Top Gainers:</span> ';
+                gainers.forEach(c => {
+                    html += `<img src="${c.image}" style="width:18px;height:18px;vertical-align:middle;"> ${c.symbol.toUpperCase()} <span style='color:#1de9b6;'>${c.price_change_percentage_24h.toFixed(2)}%</span> &nbsp;`;
+                });
+                html += '<span style="color:#e74c3c;font-weight:bold;margin-left:18px;">Top Losers:</span> ';
+                losers.forEach(c => {
+                    html += `<img src="${c.image}" style="width:18px;height:18px;vertical-align:middle;"> ${c.symbol.toUpperCase()} <span style='color:#e74c3c;'>${c.price_change_percentage_24h.toFixed(2)}%</span> &nbsp;`;
+                });
+                window.gainersLosersHTML = html;
+                updateTicker();
+            } catch (e) {
+                window.gainersLosersHTML = '';
+            }
+        }
+        updateGainersLosers();
+        setInterval(updateGainersLosers, 30000);
+
+        async function updateLiveTicker() {
+            await fetchCryptoPrices();
+            await fetchSP500();
+            updateTicker();
+        }
+        updateLiveTicker();
+        setInterval(updateLiveTicker, 15000); // update every 15s
+
+        // Plotly.js Rambo backtest chart loader
+        async function loadRamboBacktestPlotly() {
+            let chartDiv = document.querySelector('#dialog-rambo .backtest-chart');
+            chartDiv.innerHTML = '<div style="color:#b4e61d;">Loading backtest...</div>';
+            // Try both locations for rambo.json
+            let dataText = null;
+            try {
+                let resp = await fetch('assets/rambo.json');
+                if (resp.ok) dataText = await resp.text();
+            } catch (e) {}
+
+            let lines = dataText.trim().split(/\r?\n/);
+            let tradeNos = [], equity = [];
+            for (let line of lines) {
+                try {
+                    let obj = JSON.parse(line);
+                    tradeNos.push(obj.trade_no);
+                    equity.push(obj.equity);
+                } catch (e) {}
+            }
+            if (!tradeNos.length) {
+                chartDiv.innerHTML = '<div style="color:#e74c3c;">No valid data in backtest file.</div>';
+                return;
+            }
+            chartDiv.innerHTML = '<div id="rambo-plotly-chart" style="width:100%;height:320px;"></div>';
+            Plotly.newPlot('rambo-plotly-chart', [{
+                x: tradeNos,
+                y: equity,
+                mode: 'lines+markers',
+                line: { color: '#b4e61d', width: 3 },
+                marker: { color: '#fff', size: 6, line: { color: '#b4e61d', width: 1 } },
+                name: 'Equity Curve',
+                hovertemplate: 'Trade %{x}<br>Equity: %{y:.2f}<extra></extra>'
+            }], {
+                margin: { t: 24, l: 48, r: 24, b: 48 },
+                paper_bgcolor: 'rgba(34,49,34,0.95)',
+                plot_bgcolor: 'rgba(30,40,30,0.85)',
+                font: { color: '#b4e61d', family: 'Share Tech Mono, monospace' },
+                xaxis: { title: 'Trade Circuit #', gridcolor: '#b4e61d33', zeroline: false },
+                yaxis: { title: 'Equity percentage', gridcolor: '#b4e61d33', zeroline: false },
+                showlegend: false
+            }, {responsive:true});
+        }
+        window.loadRamboBacktestPlotly = loadRamboBacktestPlotly;
+
+        // Plotly.js Sniper backtest chart loader
+        async function loadSniperBacktestPlotly() {
+            let chartDiv = document.querySelector('#dialog-sniper .backtest-chart');
+            chartDiv.innerHTML = '<div style="color:#b4e61d;">Loading backtest...</div>';
+            let dataText = null;
+            try {
+                let resp = await fetch('assets/sniper.json');
+                if (resp.ok) dataText = await resp.text();
+            } catch (e) {}
+            if (!dataText) {
+                try {
+                    let resp = await fetch('sniper.json');
+                    if (resp.ok) dataText = await resp.text();
+                } catch (e) {}
+            }
+            if (!dataText) {
+                chartDiv.innerHTML = '<div style="color:#e74c3c;">Backtest data not found.</div>';
+                return;
+            }
+            let dataArr = [];
+            try {
+                dataArr = JSON.parse(dataText);
+            } catch (e) {
+                chartDiv.innerHTML = '<div style="color:#e74c3c;">Invalid JSON format in backtest file.</div>';
+                return;
+            }
+            if (!Array.isArray(dataArr) || !dataArr.length) {
+                chartDiv.innerHTML = '<div style="color:#e74c3c;">No valid data in backtest file.</div>';
+                return;
+            }
+            let dates = dataArr.map(d => d.date);
+            let profitLoss = dataArr.map(d => d["profit/loss %"]);
+            chartDiv.innerHTML = '<div id="sniper-plotly-chart" style="width:100%;height:320px;"></div>';
+            Plotly.newPlot('sniper-plotly-chart', [
+                {
+                    x: dates,
+                    y: profitLoss,
+                    type: 'bar',
+                    marker: { color: profitLoss.map(v => v >= 0 ? '#b4e61d' : '#e74c3c') },
+                    name: 'Profit/Loss %',
+                    opacity: 0.8,
+                    hovertemplate: 'Date %{x}<br>P/L: %{y:.2f}%<extra></extra>'
+                }
+            ], {
+                margin: { t: 24, l: 48, r: 24, b: 48 },
+                paper_bgcolor: 'rgba(34,49,34,0.95)',
+                plot_bgcolor: 'rgba(30,40,30,0.85)',
+                font: { color: '#b4e61d', family: 'Share Tech Mono, monospace' },
+                xaxis: { title: 'Date', gridcolor: '#1de9b633', zeroline: false, tickangle: -30 },
+                yaxis: { title: 'Profit/Loss %', gridcolor: '#1de9b633', zeroline: false },
+                showlegend: false
+            }, {responsive:true});
+        }
+        // Show chart when Sniper dialog opens
+        document.querySelector('[data-bot="sniper"]').addEventListener('click', loadSniperBacktestPlotly);
+
+        // Plotly.js Surgical Strike backtest chart loader
+        async function loadSurgicalBacktestPlotly() {
+            let chartDiv = document.querySelector('#dialog-surgical-strike .backtest-chart');
+            chartDiv.innerHTML = '<div style="color:#b4e61d;">Loading backtest...</div>';
+            let dataText = null;
+            try {
+                let resp = await fetch('assets/surgical.json');
+                if (resp.ok) dataText = await resp.text();
+            } catch (e) {}
+            if (!dataText) {
+                try {
+                    let resp = await fetch('surgical.json');
+                    if (resp.ok) dataText = await resp.text();
+                } catch (e) {}
+            }
+            if (!dataText) {
+                chartDiv.innerHTML = '<div style="color:#e74c3c;">Backtest data not found.</div>';
+                return;
+            }
+            let dataArr = [];
+            try {
+                dataArr = JSON.parse(dataText);
+            } catch (e) {
+                chartDiv.innerHTML = '<div style="color:#e74c3c;">Invalid JSON format in backtest file.</div>';
+                return;
+            }
+            if (!Array.isArray(dataArr) || !dataArr.length) {
+                chartDiv.innerHTML = '<div style="color:#e74c3c;">No valid data in backtest file.</div>';
+                return;
+            }
+            // Plot profit/loss % as a bar chart (like Sniper)
+            let x = dataArr.map(d => d.date || d.trade_no);
+            let profitLoss = dataArr.map(d => d["profit/loss %"]);
+            chartDiv.innerHTML = '<div id="surgical-plotly-chart" style="width:100%;height:320px;"></div>';
+            Plotly.newPlot('surgical-plotly-chart', [
+                {
+                    x: x,
+                    y: profitLoss,
+                    type: 'bar',
+                    marker: { color: profitLoss.map(v => v >= 0 ? '#b4e61d' : '#e74c3c') },
+                    name: 'Profit/Loss %',
+                    opacity: 0.8,
+                    hovertemplate: (dataArr[0].date ? 'Date %{x}' : 'Trade %{x}') + '<br>P/L: %{y:.2f}%<extra></extra>'
+                }
+            ], {
+                margin: { t: 24, l: 48, r: 24, b: 48 },
+                paper_bgcolor: 'rgba(34,49,34,0.95)',
+                plot_bgcolor: 'rgba(30,40,30,0.85)',
+                font: { color: '#b4e61d', family: 'Share Tech Mono, monospace' },
+                xaxis: { title: dataArr[0].date ? 'Date' : 'Trade #', gridcolor: '#1de9b633', zeroline: false, tickangle: -30 },
+                yaxis: { title: 'Profit/Loss %', gridcolor: '#1de9b633', zeroline: false },
+                showlegend: false
+            }, {responsive:true});
+        }
+        // Show chart when Surgical Strike dialog opens
+        document.querySelector('[data-bot="surgical-strike"]').addEventListener('click', loadSurgicalBacktestPlotly);
+    });
+    // ...existing code...
+    </script>
+</body>
+</html>

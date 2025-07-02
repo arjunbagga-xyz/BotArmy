@@ -1,0 +1,627 @@
+[
+  {
+    "date": "2019-07-01",
+    "equity": 106.38,
+    "profit/loss %": 6.38
+  },
+  {
+    "date": "2019-07-10",
+    "equity": 110.7,
+    "profit/loss %": 4.06
+  },
+  {
+    "date": "2019-07-20",
+    "equity": 117.44,
+    "profit/loss %": 6.09
+  },
+  {
+    "date": "2019-07-29",
+    "equity": 128.02,
+    "profit/loss %": 9.01
+  },
+  {
+    "date": "2019-08-07",
+    "equity": 132.58,
+    "profit/loss %": 3.56
+  },
+  {
+    "date": "2019-08-18",
+    "equity": 130.14,
+    "profit/loss %": -1.84
+  },
+  {
+    "date": "2019-08-28",
+    "equity": 139.35,
+    "profit/loss %": 7.08
+  },
+  {
+    "date": "2019-09-07",
+    "equity": 147.41,
+    "profit/loss %": 5.78
+  },
+  {
+    "date": "2019-09-21",
+    "equity": 151.29,
+    "profit/loss %": 2.63
+  },
+  {
+    "date": "2019-09-29",
+    "equity": 165.13,
+    "profit/loss %": 9.15
+  },
+  {
+    "date": "2019-10-13",
+    "equity": 174.77,
+    "profit/loss %": 5.84
+  },
+  {
+    "date": "2019-10-21",
+    "equity": 172.41,
+    "profit/loss %": -1.35
+  },
+  {
+    "date": "2019-11-03",
+    "equity": 186.88,
+    "profit/loss %": 8.39
+  },
+  {
+    "date": "2019-11-16",
+    "equity": 194.45,
+    "profit/loss %": 4.05
+  },
+  {
+    "date": "2019-12-01",
+    "equity": 213.85,
+    "profit/loss %": 9.98
+  },
+  {
+    "date": "2019-12-12",
+    "equity": 230.75,
+    "profit/loss %": 7.9
+  },
+  {
+    "date": "2019-12-21",
+    "equity": 222.12,
+    "profit/loss %": -3.74
+  },
+  {
+    "date": "2019-12-30",
+    "equity": 227.78,
+    "profit/loss %": 2.55
+  },
+  {
+    "date": "2020-01-09",
+    "equity": 237.19,
+    "profit/loss %": 4.13
+  },
+  {
+    "date": "2020-01-22",
+    "equity": 254.76,
+    "profit/loss %": 7.41
+  },
+  {
+    "date": "2020-02-04",
+    "equity": 243.58,
+    "profit/loss %": -4.39
+  },
+  {
+    "date": "2020-02-12",
+    "equity": 250.3,
+    "profit/loss %": 2.76
+  },
+  {
+    "date": "2020-02-20",
+    "equity": 260.56,
+    "profit/loss %": 4.1
+  },
+  {
+    "date": "2020-03-05",
+    "equity": 285.84,
+    "profit/loss %": 9.7
+  },
+  {
+    "date": "2020-03-13",
+    "equity": 300.36,
+    "profit/loss %": 5.08
+  },
+  {
+    "date": "2020-03-25",
+    "equity": 297.18,
+    "profit/loss %": -1.06
+  },
+  {
+    "date": "2020-04-05",
+    "equity": 321.31,
+    "profit/loss %": 8.12
+  },
+  {
+    "date": "2020-04-17",
+    "equity": 337.66,
+    "profit/loss %": 5.09
+  },
+  {
+    "date": "2020-05-01",
+    "equity": 359.98,
+    "profit/loss %": 6.61
+  },
+  {
+    "date": "2020-05-10",
+    "equity": 371.75,
+    "profit/loss %": 3.27
+  },
+  {
+    "date": "2020-05-24",
+    "equity": 356.47,
+    "profit/loss %": -4.11
+  },
+  {
+    "date": "2020-06-08",
+    "equity": 386.02,
+    "profit/loss %": 8.29
+  },
+  {
+    "date": "2020-06-20",
+    "equity": 400.5,
+    "profit/loss %": 3.75
+  },
+  {
+    "date": "2020-06-28",
+    "equity": 426.37,
+    "profit/loss %": 6.46
+  },
+  {
+    "date": "2020-07-08",
+    "equity": 414.26,
+    "profit/loss %": -2.84
+  },
+  {
+    "date": "2020-07-20",
+    "equity": 426.24,
+    "profit/loss %": 2.89
+  },
+  {
+    "date": "2020-08-01",
+    "equity": 444.48,
+    "profit/loss %": 4.28
+  },
+  {
+    "date": "2020-08-14",
+    "equity": 474.35,
+    "profit/loss %": 6.72
+  },
+  {
+    "date": "2020-08-28",
+    "equity": 461.73,
+    "profit/loss %": -2.66
+  },
+  {
+    "date": "2020-09-10",
+    "equity": 501.3,
+    "profit/loss %": 8.57
+  },
+  {
+    "date": "2020-09-24",
+    "equity": 538.15,
+    "profit/loss %": 7.35
+  },
+  {
+    "date": "2020-10-04",
+    "equity": 572.86,
+    "profit/loss %": 6.45
+  },
+  {
+    "date": "2020-10-13",
+    "equity": 604.88,
+    "profit/loss %": 5.59
+  },
+  {
+    "date": "2020-10-25",
+    "equity": 576.21,
+    "profit/loss %": -4.74
+  },
+  {
+    "date": "2020-11-02",
+    "equity": 599.72,
+    "profit/loss %": 4.08
+  },
+  {
+    "date": "2020-11-17",
+    "equity": 626.82,
+    "profit/loss %": 4.52
+  },
+  {
+    "date": "2020-11-28",
+    "equity": 658.85,
+    "profit/loss %": 5.11
+  },
+  {
+    "date": "2020-12-08",
+    "equity": 630.13,
+    "profit/loss %": -4.36
+  },
+  {
+    "date": "2020-12-21",
+    "equity": 675.5,
+    "profit/loss %": 7.2
+  },
+  {
+    "date": "2020-12-31",
+    "equity": 733.25,
+    "profit/loss %": 8.55
+  },
+  {
+    "date": "2021-01-15",
+    "equity": 800.35,
+    "profit/loss %": 9.15
+  },
+  {
+    "date": "2021-01-27",
+    "equity": 776.26,
+    "profit/loss %": -3.01
+  },
+  {
+    "date": "2021-02-04",
+    "equity": 800.86,
+    "profit/loss %": 3.17
+  },
+  {
+    "date": "2021-02-14",
+    "equity": 833.22,
+    "profit/loss %": 4.04
+  },
+  {
+    "date": "2021-02-24",
+    "equity": 868.21,
+    "profit/loss %": 4.2
+  },
+  {
+    "date": "2021-03-07",
+    "equity": 854.58,
+    "profit/loss %": -1.57
+  },
+  {
+    "date": "2021-03-19",
+    "equity": 925.17,
+    "profit/loss %": 8.26
+  },
+  {
+    "date": "2021-04-01",
+    "equity": 1011.95,
+    "profit/loss %": 9.38
+  },
+  {
+    "date": "2021-04-10",
+    "equity": 1038.26,
+    "profit/loss %": 2.6
+  },
+  {
+    "date": "2021-04-23",
+    "equity": 998.7,
+    "profit/loss %": -3.81
+  },
+  {
+    "date": "2021-05-02",
+    "equity": 1046.24,
+    "profit/loss %": 4.76
+  },
+  {
+    "date": "2021-05-14",
+    "equity": 1130.88,
+    "profit/loss %": 8.09
+  },
+  {
+    "date": "2021-05-21",
+    "equity": 1237.86,
+    "profit/loss %": 9.46
+  },
+  {
+    "date": "2021-06-01",
+    "equity": 1360.78,
+    "profit/loss %": 9.93
+  },
+  {
+    "date": "2021-06-16",
+    "equity": 1308.67,
+    "profit/loss %": -3.83
+  },
+  {
+    "date": "2021-06-25",
+    "equity": 1402.76,
+    "profit/loss %": 7.19
+  },
+  {
+    "date": "2021-07-03",
+    "equity": 1436.71,
+    "profit/loss %": 2.42
+  },
+  {
+    "date": "2021-07-12",
+    "equity": 1566.58,
+    "profit/loss %": 9.04
+  },
+  {
+    "date": "2021-07-25",
+    "equity": 1684.86,
+    "profit/loss %": 7.55
+  },
+  {
+    "date": "2021-08-07",
+    "equity": 1781.24,
+    "profit/loss %": 5.72
+  },
+  {
+    "date": "2021-08-20",
+    "equity": 1746.68,
+    "profit/loss %": -1.94
+  },
+  {
+    "date": "2021-09-01",
+    "equity": 1868.77,
+    "profit/loss %": 6.99
+  },
+  {
+    "date": "2021-09-12",
+    "equity": 1990.24,
+    "profit/loss %": 6.5
+  },
+  {
+    "date": "2021-09-27",
+    "equity": 2155.63,
+    "profit/loss %": 8.31
+  },
+  {
+    "date": "2021-10-04",
+    "equity": 2230.43,
+    "profit/loss %": 3.47
+  },
+  {
+    "date": "2021-10-16",
+    "equity": 2418.24,
+    "profit/loss %": 8.42
+  },
+  {
+    "date": "2021-10-29",
+    "equity": 2323.92,
+    "profit/loss %": -3.9
+  },
+  {
+    "date": "2021-11-08",
+    "equity": 2479.86,
+    "profit/loss %": 6.71
+  },
+  {
+    "date": "2021-11-16",
+    "equity": 2572.11,
+    "profit/loss %": 3.72
+  },
+  {
+    "date": "2021-12-01",
+    "equity": 2740.33,
+    "profit/loss %": 6.54
+  },
+  {
+    "date": "2021-12-15",
+    "equity": 2925.85,
+    "profit/loss %": 6.77
+  },
+  {
+    "date": "2021-12-23",
+    "equity": 3063.36,
+    "profit/loss %": 4.7
+  },
+  {
+    "date": "2022-01-06",
+    "equity": 2916.63,
+    "profit/loss %": -4.79
+  },
+  {
+    "date": "2022-01-13",
+    "equity": 3139.75,
+    "profit/loss %": 7.65
+  },
+  {
+    "date": "2022-01-25",
+    "equity": 3415.73,
+    "profit/loss %": 8.79
+  },
+  {
+    "date": "2022-02-09",
+    "equity": 3743.98,
+    "profit/loss %": 9.61
+  },
+  {
+    "date": "2022-02-19",
+    "equity": 3875.77,
+    "profit/loss %": 3.52
+  },
+  {
+    "date": "2022-03-03",
+    "equity": 3753.3,
+    "profit/loss %": -3.16
+  },
+  {
+    "date": "2022-03-10",
+    "equity": 3920.32,
+    "profit/loss %": 4.45
+  },
+  {
+    "date": "2022-03-25",
+    "equity": 4050.47,
+    "profit/loss %": 3.32
+  },
+  {
+    "date": "2022-04-09",
+    "equity": 4307.27,
+    "profit/loss %": 6.34
+  },
+  {
+    "date": "2022-04-17",
+    "equity": 4126.8,
+    "profit/loss %": -4.19
+  },
+  {
+    "date": "2022-04-26",
+    "equity": 4247.3,
+    "profit/loss %": 2.92
+  },
+  {
+    "date": "2022-05-06",
+    "equity": 4451.6,
+    "profit/loss %": 4.81
+  },
+  {
+    "date": "2022-05-20",
+    "equity": 4610.07,
+    "profit/loss %": 3.56
+  },
+  {
+    "date": "2022-05-29",
+    "equity": 4483.76,
+    "profit/loss %": -2.74
+  },
+  {
+    "date": "2022-06-10",
+    "equity": 4859.5,
+    "profit/loss %": 8.38
+  },
+  {
+    "date": "2022-06-19",
+    "equity": 5098.58,
+    "profit/loss %": 4.92
+  },
+  {
+    "date": "2022-06-28",
+    "equity": 5546.24,
+    "profit/loss %": 8.78
+  },
+  {
+    "date": "2022-07-05",
+    "equity": 5423.67,
+    "profit/loss %": -2.21
+  },
+  {
+    "date": "2022-07-17",
+    "equity": 5552.21,
+    "profit/loss %": 2.37
+  },
+  {
+    "date": "2022-08-01",
+    "equity": 5707.67,
+    "profit/loss %": 2.8
+  },
+  {
+    "date": "2022-08-09",
+    "equity": 6156.29,
+    "profit/loss %": 7.86
+  },
+  {
+    "date": "2022-08-16",
+    "equity": 6712.21,
+    "profit/loss %": 9.03
+  },
+  {
+    "date": "2022-08-26",
+    "equity": 6479.97,
+    "profit/loss %": -3.46
+  },
+  {
+    "date": "2022-09-07",
+    "equity": 6855.8,
+    "profit/loss %": 5.8
+  },
+  {
+    "date": "2022-09-20",
+    "equity": 7127.29,
+    "profit/loss %": 3.96
+  },
+  {
+    "date": "2022-10-02",
+    "equity": 7270.55,
+    "profit/loss %": 2.01
+  },
+  {
+    "date": "2022-10-13",
+    "equity": 7061.89,
+    "profit/loss %": -2.87
+  },
+  {
+    "date": "2022-10-27",
+    "equity": 7529.38,
+    "profit/loss %": 6.62
+  },
+  {
+    "date": "2022-11-09",
+    "equity": 7991.69,
+    "profit/loss %": 6.14
+  },
+  {
+    "date": "2022-11-19",
+    "equity": 8416.05,
+    "profit/loss %": 5.31
+  },
+  {
+    "date": "2022-12-02",
+    "equity": 8124.85,
+    "profit/loss %": -3.46
+  },
+  {
+    "date": "2022-12-13",
+    "equity": 8552.22,
+    "profit/loss %": 5.26
+  },
+  {
+    "date": "2022-12-23",
+    "equity": 8734.38,
+    "profit/loss %": 2.13
+  },
+  {
+    "date": "2023-01-02",
+    "equity": 8925.66,
+    "profit/loss %": 2.19
+  },
+  {
+    "date": "2023-01-09",
+    "equity": 9727.19,
+    "profit/loss %": 8.98
+  },
+  {
+    "date": "2023-01-22",
+    "equity": 9313.78,
+    "profit/loss %": -4.25
+  },
+  {
+    "date": "2023-02-02",
+    "equity": 10008.59,
+    "profit/loss %": 7.46
+  },
+  {
+    "date": "2023-02-10",
+    "equity": 10977.42,
+    "profit/loss %": 9.68
+  },
+  {
+    "date": "2023-02-20",
+    "equity": 11396.76,
+    "profit/loss %": 3.82
+  },
+  {
+    "date": "2023-03-03",
+    "equity": 12229.86,
+    "profit/loss %": 7.31
+  },
+  {
+    "date": "2023-03-13",
+    "equity": 11854.41,
+    "profit/loss %": -3.07
+  },
+  {
+    "date": "2023-03-23",
+    "equity": 12225.45,
+    "profit/loss %": 3.13
+  },
+  {
+    "date": "2023-04-05",
+    "equity": 13144.8,
+    "profit/loss %": 7.52
+  }
+]
